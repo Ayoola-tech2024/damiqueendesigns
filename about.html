@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Damiqueen Footwears</title>
+    <meta name="description" content="Learn about Damiqueen Footwears' commitment to artisan craftsmanship and modern design in premium Nigerian footwear.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Core Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    
+    <style>
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #111111;
+            --secondary: #FFFFFF;
+            --accent: #C6A667;
+            --light-gray: #F5F5F5;
+            --dark-gray: #222222;
+            --text-light: #666666;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--primary);
+            background: linear-gradient(135deg, #FEFEFE 0%, #F5F5F5 100%);
+            overflow-x: hidden;
+            padding-top: 80px;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        h1 { font-size: 3rem; }
+        h2 { font-size: 2.25rem; }
+        h3 { font-size: 1.5rem; }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(198, 166, 103, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--accent);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after, .nav-links a.active::after {
+            width: 100%;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: var(--light-gray);
+            padding: 4rem 0 2rem;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .page-header p {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Story Sections */
+        .story-section {
+            padding: 6rem 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .story-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-bottom: 4rem;
+        }
+
+        .story-grid.reverse {
+            direction: rtl;
+        }
+
+        .story-grid.reverse > * {
+            direction: ltr;
+        }
+
+        .story-content h2 {
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .story-content p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        .story-image {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .story-image img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        /* Mission Section */
+        .mission-section {
+            background: white;
+            padding: 6rem 0;
+        }
+
+        .mission-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .mission-card {
+            text-align: center;
+            padding: 2rem;
+            background: var(--light-gray);
+            border-radius: 12px;
+            transition: transform 0.3s ease;
+        }
+
+        .mission-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .mission-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+
+        .mission-icon svg {
+            width: 40px;
+            height: 40px;
+            fill: white;
+        }
+
+        .mission-card h3 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .mission-card p {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Values Section */
+        .values-section {
+            background: var(--dark-gray);
+            color: white;
+            padding: 6rem 0;
+        }
+
+        .values-section h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--accent);
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .value-item {
+            padding: 1.5rem;
+            border-left: 4px solid var(--accent);
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 0 8px 8px 0;
+        }
+
+        .value-item h3 {
+            margin-bottom: 0.75rem;
+            color: var(--accent);
+        }
+
+        .value-item p {
+            color: #CCCCCC;
+            line-height: 1.6;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: var(--accent);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn-white {
+            background: white;
+            color: var(--accent);
+        }
+
+        .btn-white:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--primary);
+            color: white;
+            padding: 3rem 0 2rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .footer-section p, .footer-section a {
+            color: #CCCCCC;
+            text-decoration: none;
+            line-height: 1.8;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #333;
+            padding-top: 2rem;
+            color: #999;
+        }
+
+        /* WhatsApp Float Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(37, 211, 102, 0.4);
+        }
+
+        .whatsapp-float svg {
+            width: 30px;
+            height: 30px;
+            fill: white;
+        }
+
+        /* Animations */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .animate-on-scroll.animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            
+            .story-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .story-grid.reverse {
+                direction: ltr;
+            }
+            
+            .mission-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">DAMIQUEEN</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="about.html" class="active">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <h1>Our Story</h1>
+        <p>Crafting confidence through exceptional footwear since our inception</p>
+    </section>
+
+    <!-- Story Section 1 -->
+    <section class="story-section">
+        <div class="container">
+            <div class="story-grid animate-on-scroll">
+                <div class="story-content">
+                    <h2>The Beginning</h2>
+                    <p>Damiqueen Footwears was born from a simple yet powerful vision: to create premium footwear that embodies the perfect fusion of traditional Nigerian craftsmanship and contemporary design excellence.</p>
+                    <p>Our founder, inspired by the rich heritage of Nigerian artisan shoemaking, recognized the need for a brand that could deliver international quality while celebrating local artistry. This vision became the foundation of everything we do at Damiqueen.</p>
+                    <p>Every pair of shoes we create tells a story of dedication, precision, and uncompromising commitment to excellence.</p>
+                </div>
+                <div class="story-image">
+                    <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&h=400&fit=crop" alt="Craftsman at work">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section class="mission-section">
+        <div class="container">
+            <div class="section-header animate-on-scroll" style="text-align: center;">
+                <h2>Our Mission</h2>
+                <p style="color: var(--text-light); font-size: 1.1rem;">We are dedicated to three core principles that guide every aspect of our craft</p>
+            </div>
+            
+            <div class="mission-grid">
+                <div class="mission-card animate-on-scroll">
+                    <div class="mission-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                    </div>
+                    <h3>Quality Excellence</h3>
+                    <p>We source only the finest materials and employ time-tested techniques to ensure every pair meets the highest standards of durability, comfort, and style.</p>
+                </div>
+                
+                <div class="mission-card animate-on-scroll">
+                    <div class="mission-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                    </div>
+                    <h3>Customer Confidence</h3>
+                    <p>Our footwear is designed to empower, giving you the confidence to step into any situation knowing you look and feel your absolute best.</p>
+                </div>
+                
+                <div class="mission-card animate-on-scroll">
+                    <div class="mission-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm3.5 6L12 10.5 8.5 8 12 5.5 15.5 8zM12 19c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z"/>
+                        </svg>
+                    </div>
+                    <h3>Innovation & Tradition</h3>
+                    <p>We honor traditional shoemaking methods while embracing modern technology and design innovation to create footwear that's both timeless and contemporary.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Story Section 2 -->
+    <section class="story-section">
+        <div class="container">
+            <div class="story-grid reverse animate-on-scroll">
+                <div class="story-content">
+                    <h2>Craftsmanship Process</h2>
+                    <p>Our shoemaking process is a labor of love that involves over 200 individual steps, each executed with precision and care by our master craftsmen.</p>
+                    <p>From the initial design sketches to the final polishing, every stage of production is meticulously managed to ensure consistency and quality. We use only premium leather sourced from trusted suppliers, and our craftsmen employ both traditional hand-stitching techniques and modern precision equipment.</p>
+                    <p>The result is footwear that not only looks exceptional but also provides superior comfort and durability, designed to be cherished for years to come.</p>
+                </div>
+                <div class="story-image">
+                    <img src="https://images.unsplash.com/photo-1603320414859-d8856f663a69?w=600&h=400&fit=crop" alt="Premium leather materials">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="values-section">
+        <div class="container">
+            <h2>Our Core Values</h2>
+            <div class="values-grid">
+                <div class="value-item animate-on-scroll">
+                    <h3>Integrity</h3>
+                    <p>We believe in transparency, honesty, and ethical business practices in every interaction, from material sourcing to customer service.</p>
+                </div>
+                
+                <div class="value-item animate-on-scroll">
+                    <h3>Excellence</h3>
+                    <p>We never compromise on quality, constantly striving for perfection in every stitch, every cut, and every finish.</p>
+                </div>
+                
+                <div class="value-item animate-on-scroll">
+                    <h3>Innovation</h3>
+                    <p>We embrace new technologies and design approaches while respecting the time-tested traditions that make our craft special.</p>
+                </div>
+                
+                <div class="value-item animate-on-scroll">
+                    <h3>Customer Focus</h3>
+                    <p>Your satisfaction is our ultimate measure of success. We listen, adapt, and continuously improve based on your feedback.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Experience the Damiqueen Difference</h2>
+            <p>Step into confidence with footwear that's crafted for your success</p>
+            <a href="shop.html" class="btn btn-white">Shop Collection</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>DAMIQUEEN</h3>
+                    <p>Crafted for Confidence. Designed for Comfort.</p>
+                    <p>Premium Nigerian footwear for the discerning individual.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p>WhatsApp: +234 913 368 3657</p>
+                    <p>Email: damiqueen25@gmail.com</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <p><a href="index.html">Home</a></p>
+                    <p><a href="shop.html">Shop Collection</a></p>
+                    <p><a href="contact.html">Contact Us</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Damiqueen Footwears. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float Button -->
+    <div class="whatsapp-float" title="Chat with us on WhatsApp">
+        <svg viewBox="0 0 24 24">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.465 1.066 2.888 1.213 3.074.149.186 2.096 3.198 5.079 4.446.685.274 1.219.437 1.634.557.686.194 1.311.167 1.803.099.554-.074 1.707-.697 1.947-1.37.24-.673.24-1.251.173-1.37-.067-.119-.198-.174-.496-.273z"/>
+            <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 22C6.486 22 2 17.514 2 12S6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/>
+        </svg>
+    </div>
+
+    <script src="main.js"></script>
+    <script>
+        // About page specific functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize scroll animations
+            window.damiqueenApp.setupScrollAnimations();
+            
+            // Update active nav link
+            document.querySelector('.nav-links a[href="about.html"]').classList.add('active');
+        });
+    </script>
+</body>
+</html>

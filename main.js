@@ -14,6 +14,8 @@ class DamiqueenApp {
         this.initializeAnimations();
         this.updateCartCount();
         this.initializeFilters();
+        // setup mobile menu for hamburger drawer (injects hamburger if missing)
+        this.setupMobileMenu();
         this.setupScrollAnimations();
     }
 
@@ -214,6 +216,92 @@ class DamiqueenApp {
         });
     }
 
+    // New: setupMobileMenu added to class. This will inject a hamburger button if it isn't present
+    // and create a slide-in drawer that clones the existing .nav-links.
+    setupMobileMenu() {
+        const navContainer = document.querySelector('.nav-container');
+        const navLinks = document.querySelector('.nav-links');
+        if (!navContainer || !navLinks) return;
+
+        // Inject hamburger button if not present
+        let hamburger = document.querySelector('.hamburger');
+        if (!hamburger) {
+            hamburger = document.createElement('button');
+            hamburger.className = 'hamburger';
+            hamburger.setAttribute('aria-label', 'Open menu');
+            hamburger.setAttribute('aria-expanded', 'false');
+            hamburger.setAttribute('aria-controls', 'mobile-drawer');
+            hamburger.innerHTML = '<span class="hamburger-box"><span class="hamburger-inner"></span></span>';
+            // insert after logo if possible
+            const logo = navContainer.querySelector('.logo');
+            if (logo && logo.parentNode === navContainer) {
+                navContainer.insertBefore(hamburger, logo.nextSibling);
+            } else {
+                navContainer.appendChild(hamburger);
+            }
+        }
+
+        // Avoid recreating drawer
+        if (document.getElementById('mobile-drawer')) return;
+
+        const drawer = document.createElement('div');
+        drawer.id = 'mobile-drawer';
+        drawer.className = 'mobile-drawer';
+        // clone links to preserve markup
+        const clonedLinks = navLinks.cloneNode(true);
+        // remove any desktop-only classes or attributes
+        clonedLinks.className = 'drawer-links';
+        drawer.innerHTML = '';
+        const closeBtn = document.createElement('button');
+        closeBtn.className = 'drawer-close';
+        closeBtn.setAttribute('aria-label', 'Close menu');
+        closeBtn.innerHTML = '&times;';
+        drawer.appendChild(closeBtn);
+        drawer.appendChild(clonedLinks);
+
+        document.body.appendChild(drawer);
+
+        const openDrawer = () => {
+            drawer.classList.add('open');
+            hamburger.setAttribute('aria-expanded', 'true');
+            document.body.classList.add('no-scroll');
+            // focus first link
+            const firstLink = drawer.querySelector('a');
+            firstLink?.focus();
+        };
+
+        const closeDrawer = () => {
+            drawer.classList.remove('open');
+            hamburger.setAttribute('aria-expanded', 'false');
+            document.body.classList.remove('no-scroll');
+            hamburger.focus();
+        };
+
+        hamburger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (drawer.classList.contains('open')) closeDrawer(); else openDrawer();
+        });
+
+        closeBtn.addEventListener('click', (e) => { e.stopPropagation(); closeDrawer(); });
+
+        // Close when clicking a link
+        drawer.querySelectorAll('a').forEach(a => {
+            a.addEventListener('click', () => setTimeout(closeDrawer, 100));
+        });
+
+        // Close on Escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && drawer.classList.contains('open')) closeDrawer();
+        });
+
+        // Close when clicking outside
+        document.addEventListener('click', (e) => {
+            if (drawer.classList.contains('open') && !drawer.contains(e.target) && !hamburger.contains(e.target)) {
+                closeDrawer();
+            }
+        });
+    }
+
     openOrderModal(productId) {
         const product = this.products.find(p => p.id === productId);
         if (!product) return;
@@ -303,15 +391,7 @@ class DamiqueenApp {
             return;
         }
 
-        const message = `New Order from: ${buyerName}
-
-Product Name: ${product.name}
-Price: ₦${product.price.toLocaleString()}
-Quantity: ${quantity}
-Size: ${size}
-${deliveryDate ? `Expected Delivery Date: ${deliveryDate}\n` : ''}Image Link: ${product.image}
-
-Please confirm availability.`;
+        const message = `New Order from: ${buyerName}\n\nProduct Name: ${product.name}\nPrice: ₦${product.price.toLocaleString()}\nQuantity: ${quantity}\nSize: ${size}\n${deliveryDate ? `Expected Delivery Date: ${deliveryDate}\n` : ''}Image Link: ${product.image}\n\nPlease confirm availability.`;
 
         const whatsappUrl = `https://wa.me/2349133683657?text=${encodeURIComponent(message)}`;
         window.open(whatsappUrl, '_blank');
@@ -343,7 +423,8 @@ Please confirm availability.`;
         document.querySelectorAll('.filter-btn').forEach(btn => {
             btn.classList.remove('active');
         });
-        document.querySelector(`[data-category="${category}"]`).classList.add('active');
+        const btn = document.querySelector(`[data-category="${category}"]`);
+        if (btn) btn.classList.add('active');
 
         // Filter products
         const filteredProducts = category === 'all' 

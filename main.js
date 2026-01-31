@@ -24,7 +24,7 @@ class DamiqueenApp {
                 id: 'm1',
                 name: 'Classic Oxford Black',
                 category: 'men',
-                price: 45000,
+                price: 30000,
                 image: 'https://kimi-web-img.moonshot.cn/img/www.apetogentleman.com/3023637c8fa8e57790f252d2e276f951ec657e8b.jpg',
                 description: 'Handcrafted premium leather oxford shoes featuring exquisite stitching and timeless design.',
                 sizes: ['40', '41', '42', '43', '44', '45']
@@ -33,7 +33,7 @@ class DamiqueenApp {
                 id: 'm2',
                 name: 'Elegant Brown Brogues',
                 category: 'men',
-                price: 52000,
+                price: 35000,
                 image: 'https://kimi-web-img.moonshot.cn/img/cdn.shopify.com/3f72b9f6c5f2051b8bd195160df78584838229c3.jpg',
                 description: 'Traditional brogue detailing meets modern comfort in these sophisticated brown leather shoes.',
                 sizes: ['40', '41', '42', '43', '44', '45']
@@ -42,7 +42,7 @@ class DamiqueenApp {
                 id: 'm3',
                 name: 'Premium Monk Strap',
                 category: 'men',
-                price: 58000,
+                price: 28000,
                 image: 'https://kimi-web-img.moonshot.cn/img/www.fashionbeans.com/59cbb30f76028198e0afcd75ef88dcda7ac1e095.jpg',
                 description: 'Double monk strap design with premium leather and polished buckles.',
                 sizes: ['40', '41', '42', '43', '44', '45']
@@ -51,7 +51,7 @@ class DamiqueenApp {
                 id: 'm4',
                 name: 'Luxury Leather Boots',
                 category: 'men',
-                price: 65000,
+                price: 40000,
                 image: 'https://kimi-web-img.moonshot.cn/img/i.pinimg.com/9a868a78013bf297486e2932266c7f99e57aa951.jpg',
                 description: 'Handcrafted leather boots with superior comfort and durability.',
                 sizes: ['40', '41', '42', '43', '44', '45']
@@ -60,7 +60,7 @@ class DamiqueenApp {
                 id: 'm5',
                 name: 'Brown Oxford Shoes',
                 category: 'men',
-                price: 48000,
+                price: 32000,
                 image: 'https://kimi-web-img.moonshot.cn/img/oxfordshoesonline.com/0ad043b09fd12e23a211bcc84fc381dd0ec05661.jpg',
                 description: 'Classic brown oxford shoes perfect for formal occasions.',
                 sizes: ['40', '41', '42', '43', '44', '45']
@@ -69,7 +69,7 @@ class DamiqueenApp {
                 id: 'm6',
                 name: 'White Leather Sneakers',
                 category: 'men',
-                price: 42000,
+                price: 40000,
                 image: 'https://kimi-web-img.moonshot.cn/img/images.opumo.com/b92839bd6f12ef5f4b7e28b5f780ca7087355fb3.png',
                 description: 'Premium white leather sneakers for casual luxury.',
                 sizes: ['40', '41', '42', '43', '44', '45']
@@ -79,7 +79,7 @@ class DamiqueenApp {
                 id: 'w1',
                 name: 'Classic Black Heels',
                 category: 'women',
-                price: 38000,
+                price: 20000,
                 image: 'https://kimi-web-img.moonshot.cn/img/xcdn.next.co.uk/b6105bdc5bcef5b14db2207d3a3dba935777b691.jpg',
                 description: 'Elegant black leather heels perfect for professional wear.',
                 sizes: ['36', '37', '38', '39', '40', '41']
@@ -88,7 +88,7 @@ class DamiqueenApp {
                 id: 'w2',
                 name: 'Nude Premium Pumps',
                 category: 'women',
-                price: 42000,
+                price: 40000,
                 image: 'https://kimi-web-img.moonshot.cn/img/ragnco.com/15dcc2ee77f2966794791d84a3a85fb942362461.jpg',
                 description: 'Sophisticated nude pumps with comfortable heel height.',
                 sizes: ['36', '37', '38', '39', '40', '41']
@@ -97,7 +97,7 @@ class DamiqueenApp {
                 id: 'w3',
                 name: 'Elegant Dress Shoes',
                 category: 'women',
-                price: 35000,
+                price: 30000,
                 image: 'https://kimi-web-img.moonshot.cn/img/marelbo.com/a8d96b87a9836aca0a486618c5f736eba9cef470.jpg',
                 description: 'Comfortable and stylish dress shoes for everyday elegance.',
                 sizes: ['36', '37', '38', '39', '40', '41']
@@ -106,7 +106,7 @@ class DamiqueenApp {
                 id: 'w4',
                 name: 'Luxury Stilettos',
                 category: 'women',
-                price: 55000,
+                price: 45000,
                 image: 'https://kimi-web-img.moonshot.cn/img/m.media-amazon.com/258084ca3a599ba6906e252ad7cc9930c3f7a956.jpg',
                 description: 'High-end stilettos with premium materials and craftsmanship.',
                 sizes: ['36', '37', '38', '39', '40', '41']
@@ -115,7 +115,7 @@ class DamiqueenApp {
                 id: 'w5',
                 name: 'Comfortable Wedges',
                 category: 'women',
-                price: 32000,
+                price: 35000,
                 image: 'https://kimi-web-img.moonshot.cn/img/m.media-amazon.com/4cda4bb664c5b1e25e0dff4b7b057fe195282324.jpg',
                 description: 'Stylish wedges offering both height and comfort.',
                 sizes: ['36', '37', '38', '39', '40', '41']
@@ -124,7 +124,7 @@ class DamiqueenApp {
                 id: 'w6',
                 name: 'Professional Pumps',
                 category: 'women',
-                price: 40000,
+                price: 20000,
                 image: 'https://kimi-web-img.moonshot.cn/img/www.net-a-porter.com/7b174925b1db13e644c6b1a19400cfd14781de9e.jpg',
                 description: 'Professional pumps perfect for the modern workplace.',
                 sizes: ['36', '37', '38', '39', '40', '41']

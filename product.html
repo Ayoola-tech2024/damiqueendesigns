@@ -69,6 +69,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: relative;
         }
 
         .logo {
@@ -110,6 +111,35 @@
 
         .nav-links a:hover::after {
             width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.25rem;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            margin: 5px 0;
+            background: var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .nav-container.menu-open .menu-toggle span:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+
+        .nav-container.menu-open .menu-toggle span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .nav-container.menu-open .menu-toggle span:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
         }
 
         /* Product Section */
@@ -699,8 +729,34 @@
 
         /* Responsive Design */
         @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
             .nav-links {
-                display: none;
+                display: flex;
+                position: absolute;
+                top: calc(100% + 1px);
+                right: 1rem;
+                left: 1rem;
+                background: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(10px);
+                border: 1px solid rgba(198, 166, 103, 0.2);
+                border-radius: 10px;
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+                padding: 1rem;
+                opacity: 0;
+                pointer-events: none;
+                transform: translateY(-10px);
+                transition: all 0.3s ease;
+            }
+
+            .nav-container.menu-open .nav-links {
+                opacity: 1;
+                pointer-events: auto;
+                transform: translateY(0);
             }
             
             .product-grid {
@@ -745,6 +801,11 @@
                 <li><a href="about.html">About</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
+            <button class="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
     </nav>
 

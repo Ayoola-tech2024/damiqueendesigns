@@ -11,10 +11,38 @@ class DamiqueenApp {
 
     init() {
         this.setupEventListeners();
+        this.setupMobileNavigation();
         this.initializeAnimations();
         this.updateCartCount();
         this.initializeFilters();
         this.setupScrollAnimations();
+    }
+
+    setupMobileNavigation() {
+        const navContainer = document.querySelector('.nav-container');
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        if (!navContainer || !menuToggle || !navLinks) return;
+
+        menuToggle.addEventListener('click', () => {
+            const isOpen = navContainer.classList.toggle('menu-open');
+            menuToggle.setAttribute('aria-expanded', String(isOpen));
+        });
+
+        navLinks.querySelectorAll('a').forEach((link) => {
+            link.addEventListener('click', () => {
+                navContainer.classList.remove('menu-open');
+                menuToggle.setAttribute('aria-expanded', 'false');
+            });
+        });
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                navContainer.classList.remove('menu-open');
+                menuToggle.setAttribute('aria-expanded', 'false');
+            }
+        });
     }
 
     initializeProducts() {

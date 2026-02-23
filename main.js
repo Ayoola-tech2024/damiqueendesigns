@@ -15,6 +15,8 @@ class DamiqueenApp {
         this.initializeAnimations();
         this.updateCartCount();
         this.initializeFilters();
+        // setup mobile menu for hamburger drawer
+        this.setupMobileMenu();
         this.setupScrollAnimations();
     }
 
@@ -242,6 +244,59 @@ class DamiqueenApp {
         });
     }
 
+    // New: setupMobileMenu added to class
+    setupMobileMenu() {
+        const navLinks = document.querySelector('.nav-links');
+        if (!navLinks) return;
+        if (document.getElementById('mobile-drawer')) return;
+
+        const drawer = document.createElement('div');
+        drawer.id = 'mobile-drawer';
+        drawer.className = 'mobile-drawer';
+        drawer.innerHTML = `
+            <button class="drawer-close" aria-label="Close menu">&times;</button>
+            <ul class="drawer-links">${navLinks.innerHTML}</ul>
+        `;
+        document.body.appendChild(drawer);
+
+        const hamburger = document.querySelector('.hamburger');
+        const closeBtn = drawer.querySelector('.drawer-close');
+
+        const openDrawer = () => {
+            drawer.classList.add('open');
+            hamburger?.setAttribute('aria-expanded', 'true');
+            document.body.classList.add('no-scroll');
+            const firstLink = drawer.querySelector('a');
+            firstLink?.focus();
+        };
+
+        const closeDrawer = () => {
+            drawer.classList.remove('open');
+            hamburger?.setAttribute('aria-expanded', 'false');
+            document.body.classList.remove('no-scroll');
+            hamburger?.focus();
+        };
+
+        hamburger?.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (drawer.classList.contains('open')) closeDrawer(); else openDrawer();
+        });
+
+        closeBtn?.addEventListener('click', (e) => { e.stopPropagation(); closeDrawer(); });
+
+        drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', () => closeDrawer()));
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && drawer.classList.contains('open')) closeDrawer();
+        });
+
+        document.addEventListener('click', (e) => {
+            if (drawer.classList.contains('open') && !drawer.contains(e.target) && !hamburger.contains(e.target)) {
+                closeDrawer();
+            }
+        });
+    }
+
     openOrderModal(productId) {
         const product = this.products.find(p => p.id === productId);
         if (!product) return;
@@ -331,15 +386,7 @@ class DamiqueenApp {
             return;
         }
 
-        const message = `New Order from: ${buyerName}
-
-Product Name: ${product.name}
-Price: ₦${product.price.toLocaleString()}
-Quantity: ${quantity}
-Size: ${size}
-${deliveryDate ? `Expected Delivery Date: ${deliveryDate}\n` : ''}Image Link: ${product.image}
-
-Please confirm availability.`;
+        const message = `New Order from: ${buyerName}\n\nProduct Name: ${product.name}\nPrice: ₦${product.price.toLocaleString()}\nQuantity: ${quantity}\nSize: ${size}\n${deliveryDate ? `Expected Delivery Date: ${deliveryDate}\n` : ''}Image Link: ${product.image}\n\nPlease confirm availability.`;
 
         const whatsappUrl = `https://wa.me/2349133683657?text=${encodeURIComponent(message)}`;
         window.open(whatsappUrl, '_blank');
